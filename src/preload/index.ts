@@ -1,11 +1,9 @@
 import { contextBridge } from 'electron'
 
-export interface NativeApi {
-}
+export interface NativeApi {}
 
 // Custom APIs for renderer
-const api: NativeApi = {
-};
+const api: NativeApi = {}
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise

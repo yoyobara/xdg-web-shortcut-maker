@@ -1,7 +1,3 @@
 export default function ShortcutSelection(): JSX.Element {
-	return (
-		<div>
-			woops
-		</div>
-	)
+	return <div>woops</div>
 }
