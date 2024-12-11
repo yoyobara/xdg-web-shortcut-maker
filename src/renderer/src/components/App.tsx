@@ -5,7 +5,7 @@ import { useState } from 'react'
 import ShortcutSelection from './ShortcutSelection'
 
 export function App(): JSX.Element {
-	const [loaded, setLoaded] = useState<boolean>(false)
+	const [loaded, setLoaded] = useState<boolean>(true);
 
 	return (
 		<>
