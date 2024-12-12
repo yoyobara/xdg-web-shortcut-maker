@@ -24,7 +24,7 @@ export default function IconSelection({availableIcons}): JSX.Element {
 			<Typography variant="h4" fontWeight="bold" color="secondary">
 				Pick the icon that fits the most
 			</Typography>
-			<ImageList cols={3} variant="standard">
+			<ImageList cols={3} variant="standard" sx={{height: 300, overflowY: "scroll"}}>
 				{
 					availableIcons.map((iconUrl: string) => <SelectableIcon src={iconUrl}/>)
 				}

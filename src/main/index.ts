@@ -8,7 +8,7 @@ function createWindow(): void {
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
 		width: 800,
-		height: 800,
+		height: 900,
 		resizable: false,
 		show: false,
 		autoHideMenuBar: true,
@@ -74,16 +74,20 @@ app.on('window-all-closed', () => {
 // In this file you can include the rest of your app"s specific main process
 // code. You can also put them in separate files and require them here.
 
+function getIconsFromDom(url: string, document: Document): string[] {
+	const icons: (string | null | undefined)[] = [];
+
+	document.querySelectorAll(`link[rel*='icon']`).forEach((element) => {
+		icons.push(new URL(element.getAttribute('href')!, url).href);
+	})
+
+	return icons.filter((val) => typeof val === 'string');
+}
+
 ipcMain.handle('getAvailableIcons', async (_, url: string) => {
 	const websiteHtml = await fetch(url).then((resp) => resp.text());
+	const document = new JSDOM(websiteHtml).window.document;
 
-	const documnt = new JSDOM(websiteHtml).window.document;
-	let availableIcons = new Array<string>();
-
-	if (url = documnt.querySelector("link[rel='icon']")?.getAttribute("href")!) {
-		availableIcons.push(url);
-	}
-
-	return availableIcons;
+	return getIconsFromDom(url, document);
 })
 
