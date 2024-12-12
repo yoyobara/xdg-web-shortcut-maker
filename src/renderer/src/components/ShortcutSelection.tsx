@@ -16,11 +16,11 @@ function NameSelection(): JSX.Element {
 	)
 }
 
-export default function ShortcutSelection(): JSX.Element {
+export default function ShortcutSelection({availableIcons}): JSX.Element {
 	return (
 		<>
 			<NameSelection/>
-			<IconSelection/>
+			<IconSelection availableIcons={availableIcons}/>
 			<Button color="secondary" variant="contained" size="large">
 				Create Shortcut!
 			</Button>

@@ -1,9 +1,15 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 
-export interface NativeApi {}
+export interface NativeApi {
+	getAvailableIcons(url: string): Promise<string[]>;
+}
 
 // Custom APIs for renderer
-const api: NativeApi = {}
+const api: NativeApi = {
+	getAvailableIcons(url) {
+		return ipcRenderer.invoke('getAvailableIcons', url);
+	},
+}
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise

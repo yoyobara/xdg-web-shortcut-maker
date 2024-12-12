@@ -6,9 +6,11 @@ function SelectableIcon({src}: {src: string}): JSX.Element {
 			borderWidth: "5px",
 			borderStyle: "solid",
 			borderColor: useTheme().palette.secondary.main,
-			margin: "10px"
+			margin: "10px",
 		}}>
 		  <img
+			width={64}
+			height={64}
 			src={src}
 			loading="lazy"
 		  />
@@ -16,24 +18,16 @@ function SelectableIcon({src}: {src: string}): JSX.Element {
 	)
 }
 
-export default function IconSelection(): JSX.Element {
+export default function IconSelection({availableIcons}): JSX.Element {
 	return (
 		<Box my={4}>
 			<Typography variant="h4" fontWeight="bold" color="secondary">
 				Pick the icon that fits the most
 			</Typography>
-			<ImageList cols={3} variant="standard" sx={{height: 500, overflowY: "scroll"}}>
-				<SelectableIcon src="https://math-media.byjusfutureschool.com/bfs-math/2022/07/04185630/Asset-2-6-300x300.png"/>
-				<SelectableIcon src="https://math-media.byjusfutureschool.com/bfs-math/2022/07/04185630/Asset-2-6-300x300.png"/>
-				<SelectableIcon src="https://math-media.byjusfutureschool.com/bfs-math/2022/07/04185630/Asset-2-6-300x300.png"/>
-				<SelectableIcon src="https://math-media.byjusfutureschool.com/bfs-math/2022/07/04185630/Asset-2-6-300x300.png"/>
-				<SelectableIcon src="https://math-media.byjusfutureschool.com/bfs-math/2022/07/04185630/Asset-2-6-300x300.png"/>
-				<SelectableIcon src="https://math-media.byjusfutureschool.com/bfs-math/2022/07/04185630/Asset-2-6-300x300.png"/>
-				<SelectableIcon src="https://math-media.byjusfutureschool.com/bfs-math/2022/07/04185630/Asset-2-6-300x300.png"/>
-				<SelectableIcon src="https://math-media.byjusfutureschool.com/bfs-math/2022/07/04185630/Asset-2-6-300x300.png"/>
-				<SelectableIcon src="https://math-media.byjusfutureschool.com/bfs-math/2022/07/04185630/Asset-2-6-300x300.png"/>
-				<SelectableIcon src="https://math-media.byjusfutureschool.com/bfs-math/2022/07/04185630/Asset-2-6-300x300.png"/>
-				<SelectableIcon src="https://math-media.byjusfutureschool.com/bfs-math/2022/07/04185630/Asset-2-6-300x300.png"/>
+			<ImageList cols={3} variant="standard">
+				{
+					availableIcons.map((iconUrl: string) => <SelectableIcon src={iconUrl}/>)
+				}
 			</ImageList>
 		</Box>
 	)
