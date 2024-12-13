@@ -8,8 +8,16 @@ export function App(): JSX.Element {
 	const [loaded, setLoaded] = useState<boolean>(false);
 	const [url, setUrl] = useState<string>('');
 	const [availableIcons, setAvailableIcons] = useState<string[]>([]);
+	const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
+	const [shortcutName, setShortcutName] = useState<string>("New Shortcut");
 
-	console.log(availableIcons);
+	const createShortcut = () => {
+		console.log({
+			url,
+			shortcutName,
+			selectedIcon,
+		})
+	}
 
 	return (
 		<>
@@ -18,7 +26,7 @@ export function App(): JSX.Element {
 			<Container>
 				<UrlEntry url={url} setUrl={setUrl} setLoaded={setLoaded} setAvailableIcons={setAvailableIcons}/>
 				{loaded ? (
-					<ShortcutSelection availableIcons={availableIcons} />
+					<ShortcutSelection availableIcons={availableIcons} selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} setShortcutName={setShortcutName} createShortcut={createShortcut}/>
 				) : (
 					<Typography variant="h2" color="info" sx={{ opacity: 0.4 }}>
 						Create your own revolutionary shortcuts!

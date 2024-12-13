@@ -1,14 +1,19 @@
 import { Box, ImageList, ImageListItem, Typography, useTheme } from "@mui/material";
 
-function SelectableIcon({src}: {src: string}): JSX.Element {
+function SelectableIcon({src, isSelected, setSelected}): JSX.Element {
+	const click = () => {
+		setSelected();
+	}
+
 	return (
 		<ImageListItem sx={{
-			borderWidth: "5px",
+			borderWidth: isSelected ? "15px" : "4px",
 			borderStyle: "solid",
 			borderColor: useTheme().palette.secondary.main,
 			margin: "10px",
 		}}>
 		  <img
+			onClick={click}
 			width={64}
 			height={64}
 			src={src}
@@ -18,7 +23,7 @@ function SelectableIcon({src}: {src: string}): JSX.Element {
 	)
 }
 
-export default function IconSelection({availableIcons}): JSX.Element {
+export default function IconSelection({availableIcons, selectedIcon, setSelectedIcon}): JSX.Element {
 	return (
 		<Box my={4}>
 			<Typography variant="h4" fontWeight="bold" color="secondary">
@@ -26,7 +31,7 @@ export default function IconSelection({availableIcons}): JSX.Element {
 			</Typography>
 			<ImageList cols={3} variant="standard" sx={{height: 300, overflowY: "scroll"}}>
 				{
-					availableIcons.map((iconUrl: string) => <SelectableIcon src={iconUrl}/>)
+					availableIcons.map((iconUrl: string, index: number) => <SelectableIcon key={index} src={iconUrl} isSelected={selectedIcon === iconUrl} setSelected={() => setSelectedIcon(iconUrl)}/>)
 				}
 			</ImageList>
 		</Box>
