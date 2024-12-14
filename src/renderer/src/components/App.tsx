@@ -3,5 +3,5 @@ export function App(): JSX.Element {
 		<>
 			<p>hello world!</p>
 		</>
-	)
+	);
 }
