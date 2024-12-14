@@ -11,11 +11,11 @@ export function App(): JSX.Element {
 	const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
 	const [shortcutName, setShortcutName] = useState<string>("New Shortcut");
 
-	const createShortcut = () => {
-		console.log({
+	const createShortcut = async () => {
+		await window.api.createShortcut({
 			url,
-			shortcutName,
-			selectedIcon,
+			name: shortcutName,
+			icon: selectedIcon!,
 		})
 	}
 

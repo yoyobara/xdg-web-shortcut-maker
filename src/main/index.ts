@@ -3,6 +3,7 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { JSDOM } from "jsdom";
+import createShortcut from './shortcut';
 
 function createWindow(): void {
 	// Create the browser window.
@@ -91,3 +92,6 @@ ipcMain.handle('getAvailableIcons', async (_, url: string) => {
 	return getIconsFromDom(url, document);
 })
 
+ipcMain.handle('createShortcut', async (_, data) => {
+	await createShortcut(data);
+})
