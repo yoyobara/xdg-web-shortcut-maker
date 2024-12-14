@@ -1,11 +1,11 @@
 import { AppBar, Button, Toolbar, Typography } from "@mui/material";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import OsIcon from "./OsIcon";
 
 export default function Navbar(): JSX.Element {
 	return (
 		<AppBar position="static">
 			<Toolbar variant="regular">
-				<AddCircleOutlineIcon fontSize="large" sx={{ mr: 2 }} />
+				<OsIcon />
 				<Typography variant="h4" fontWeight="bold" sx={{ flexGrow: 1 }}>
 					XDG Shortcut maker
 				</Typography>
