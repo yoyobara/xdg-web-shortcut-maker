@@ -14,7 +14,7 @@ export default function UrlEntry(): JSX.Element {
 				endIcon={<NavigateNext />}
 				sx={{ my: 2 }}
 			>
-				GO!
+				GO
 			</Button>
 		</>
 	);

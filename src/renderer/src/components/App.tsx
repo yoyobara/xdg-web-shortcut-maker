@@ -4,6 +4,7 @@ import UrlEntry from "./UrlEntry";
 import ShortcutSelection from "./ShortcutSelection";
 import NameSelection from "./NameSelection";
 import IconSelection from "./IconSelection";
+import CreateShortcutButton from "./CreateShortcutButton";
 
 export function App(): JSX.Element {
 	return (
@@ -14,6 +15,7 @@ export function App(): JSX.Element {
 				<ShortcutSelection>
 					<NameSelection />
 					<IconSelection />
+					<CreateShortcutButton />
 				</ShortcutSelection>
 			</Container>
 		</>
