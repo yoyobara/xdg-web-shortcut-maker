@@ -1,12 +1,19 @@
 import { Button, TextField } from "@mui/material";
 import { NavigateNext } from "@mui/icons-material";
 
-export default function UrlEntry(): JSX.Element {
+interface UrlEntryProps {
+	onUrlChange(
+		ev: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+	): void;
+}
+
+export default function UrlEntry({ onUrlChange }: UrlEntryProps): JSX.Element {
 	return (
 		<>
 			<TextField
 				fullWidth
 				placeholder="Enter URL to create shortcut to..."
+				onChange={onUrlChange}
 			/>
 			<Button
 				size="large"
