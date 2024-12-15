@@ -1,25 +1,51 @@
 import { ImageList, ImageListItem } from "@mui/material";
 
-function SelectableIcon({ src }: { src: string }): JSX.Element {
+interface SelectableIconProps {
+	src: string;
+	selectedIcon: string;
+	setSelectedIcon: React.Dispatch<React.SetStateAction<string>>;
+}
+
+interface IconSelectionProps {
+	availableIcons: string[];
+	selectedIcon: string;
+	setSelectedIcon: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function SelectableIcon({
+	src,
+	selectedIcon,
+	setSelectedIcon,
+}: SelectableIconProps): JSX.Element {
+	const isSelected = selectedIcon === src;
 	return (
-		<ImageListItem>
-			<img src={src} />
+		<ImageListItem sx={{ borderStyle: isSelected ? "dotted" : "none" }}>
+			<img onClick={() => setSelectedIcon(src)} src={src} />
 		</ImageListItem>
 	);
 }
 
-export default function IconSelection(): JSX.Element {
+export default function IconSelection({
+	availableIcons,
+	selectedIcon,
+	setSelectedIcon,
+}: IconSelectionProps): JSX.Element {
 	return (
 		<ImageList
 			cols={3}
 			gap={20}
 			sx={{ height: "500px", overflowY: "scroll" }}
 		>
-			<SelectableIcon src="https://placehold.co/180" />
-			<SelectableIcon src="https://placehold.co/180" />
-			<SelectableIcon src="https://placehold.co/180" />
-			<SelectableIcon src="https://placehold.co/64" />
-			<SelectableIcon src="https://placehold.co/32" />
+			{availableIcons.map((iconSrc: string) => {
+				return (
+					<SelectableIcon
+						selectedIcon={selectedIcon}
+						setSelectedIcon={setSelectedIcon}
+						src={iconSrc}
+						key={iconSrc}
+					/>
+				);
+			})}
 		</ImageList>
 	);
 }

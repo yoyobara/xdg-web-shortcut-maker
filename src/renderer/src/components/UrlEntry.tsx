@@ -5,9 +5,14 @@ interface UrlEntryProps {
 	onUrlChange(
 		ev: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
 	): void;
+
+	loadShortcutMenu(): Promise<void>;
 }
 
-export default function UrlEntry({ onUrlChange }: UrlEntryProps): JSX.Element {
+export default function UrlEntry({
+	onUrlChange,
+	loadShortcutMenu,
+}: UrlEntryProps): JSX.Element {
 	return (
 		<>
 			<TextField
@@ -20,6 +25,7 @@ export default function UrlEntry({ onUrlChange }: UrlEntryProps): JSX.Element {
 				variant="contained"
 				endIcon={<NavigateNext />}
 				sx={{ my: 2 }}
+				onClick={loadShortcutMenu}
 			>
 				GO
 			</Button>

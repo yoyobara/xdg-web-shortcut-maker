@@ -1,9 +1,20 @@
 import { NavigateNext } from "@mui/icons-material";
 import { Button } from "@mui/material";
 
-export default function CreateShortcutButton(): JSX.Element {
+interface CreateShortcutButtonProps {
+	createShortcut(): Promise<void>;
+}
+
+export default function CreateShortcutButton({
+	createShortcut,
+}: CreateShortcutButtonProps): JSX.Element {
 	return (
-		<Button size="large" variant="contained" endIcon={<NavigateNext />}>
+		<Button
+			onClick={createShortcut}
+			size="large"
+			variant="contained"
+			endIcon={<NavigateNext />}
+		>
 			Create shortcut
 		</Button>
 	);

@@ -11,9 +11,9 @@ export function App(): JSX.Element {
 	const [loaded, setLoaded] = useState<boolean>(true);
 
 	const [url, setUrl] = useState<string>("");
-	const [name, setName] = useState<string | null>(null);
-	const [availableIcons, setAvailableIcons] = useState<string[] | null>(null);
-	const [selectedIcon, setSelectedIcon] = useState<string | null>(null)
+	const [name, setName] = useState<string>("");
+	const [availableIcons, setAvailableIcons] = useState<string[]>([]);
+	const [selectedIcon, setSelectedIcon] = useState<string>("");
 
 	function onUrlChange(
 		ev: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
@@ -22,11 +22,26 @@ export function App(): JSX.Element {
 		setUrl(ev.target.value);
 	}
 
+	async function loadShortcutMenu(): Promise<void> {
+		setAvailableIcons(await window.api.getAvailableIcons(url));
+		setLoaded(true);
+	}
+
+	async function createShortcut(): Promise<void> {
+		console.log(url);
+		console.log(name);
+		console.log(selectedIcon);
+	}
+
 	const shortcutMenu = (
 		<ShortcutSelection>
-			<NameSelection />
-			<IconSelection />
-			<CreateShortcutButton />
+			<NameSelection setName={setName} />
+			<IconSelection
+				selectedIcon={selectedIcon}
+				setSelectedIcon={setSelectedIcon}
+				availableIcons={availableIcons}
+			/>
+			<CreateShortcutButton createShortcut={createShortcut} />
 		</ShortcutSelection>
 	);
 
@@ -34,7 +49,10 @@ export function App(): JSX.Element {
 		<>
 			<Navbar />
 			<Container maxWidth="lg" sx={{ my: 3 }}>
-				<UrlEntry onUrlChange={onUrlChange} />
+				<UrlEntry
+					loadShortcutMenu={loadShortcutMenu}
+					onUrlChange={onUrlChange}
+				/>
 				{loaded ? shortcutMenu : null}
 			</Container>
 		</>
