@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import UrlEntry from "./UrlEntry";
 import ShortcutSelection from "./ShortcutSelection";
 import NameSelection from "./NameSelection";
+import IconSelection from "./IconSelection";
 
 export function App(): JSX.Element {
 	return (
@@ -12,6 +13,7 @@ export function App(): JSX.Element {
 				<UrlEntry />
 				<ShortcutSelection>
 					<NameSelection />
+					<IconSelection />
 				</ShortcutSelection>
 			</Container>
 		</>
