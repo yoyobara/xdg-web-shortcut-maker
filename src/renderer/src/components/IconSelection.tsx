@@ -34,7 +34,7 @@ export default function IconSelection({
 		<ImageList
 			cols={3}
 			gap={20}
-			sx={{ height: "500px", overflowY: "scroll" }}
+			sx={{ height: "400px", overflowY: "scroll" }}
 		>
 			{availableIcons.map((iconSrc: string) => {
 				return (

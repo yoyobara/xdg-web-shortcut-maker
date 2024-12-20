@@ -9,7 +9,7 @@ function createWindow(): void {
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
 		width: 800,
-		height: 800,
+		height: 850,
 		show: false,
 		autoHideMenuBar: true,
 		...(process.platform === "linux" ? { icon } : {}),

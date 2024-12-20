@@ -8,7 +8,7 @@ import CreateShortcutButton from "./CreateShortcutButton";
 import { useState } from "react";
 
 export function App(): JSX.Element {
-	const [loaded, setLoaded] = useState<boolean>(true);
+	const [loaded, setLoaded] = useState<boolean>(false);
 
 	const [url, setUrl] = useState<string>("");
 	const [name, setName] = useState<string>("");
