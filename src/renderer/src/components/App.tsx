@@ -28,9 +28,11 @@ export function App(): JSX.Element {
 	}
 
 	async function createShortcut(): Promise<void> {
-		console.log(url);
-		console.log(name);
-		console.log(selectedIcon);
+		await window.api.createShortcut({
+			url,
+			name,
+			icon: selectedIcon,
+		});
 	}
 
 	const shortcutMenu = (
