@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Container, CssBaseline } from "@mui/material";
 import Navbar from "./Navbar";
 import UrlEntry from "./UrlEntry";
 import ShortcutSelection from "./ShortcutSelection";
@@ -49,6 +49,7 @@ export function App(): JSX.Element {
 
 	return (
 		<>
+			<CssBaseline />
 			<Navbar />
 			<Container maxWidth="lg" sx={{ my: 3 }}>
 				<UrlEntry
