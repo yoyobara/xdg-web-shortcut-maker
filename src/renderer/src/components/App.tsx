@@ -1,48 +1,61 @@
-import { Container, CssBaseline, Typography } from "@mui/material";
-import NavBar from "./NavBar";
+import { Container } from "@mui/material";
+import Navbar from "./Navbar";
 import UrlEntry from "./UrlEntry";
-import { useState } from "react";
 import ShortcutSelection from "./ShortcutSelection";
+import NameSelection from "./NameSelection";
+import IconSelection from "./IconSelection";
+import CreateShortcutButton from "./CreateShortcutButton";
+import { useState } from "react";
 
 export function App(): JSX.Element {
 	const [loaded, setLoaded] = useState<boolean>(false);
-	const [url, setUrl] = useState<string>("");
-	const [availableIcons, setAvailableIcons] = useState<string[]>([]);
-	const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
-	const [shortcutName, setShortcutName] = useState<string>("New Shortcut");
 
-	const createShortcut = async () => {
+	const [url, setUrl] = useState<string>("");
+	const [name, setName] = useState<string>("");
+	const [availableIcons, setAvailableIcons] = useState<string[]>([]);
+	const [selectedIcon, setSelectedIcon] = useState<string>("");
+
+	function onUrlChange(
+		ev: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+	): void {
+		setLoaded(false);
+		setUrl(ev.target.value);
+	}
+
+	async function loadShortcutMenu(): Promise<void> {
+		setAvailableIcons(await window.api.getAvailableIcons(url));
+		setLoaded(true);
+	}
+
+	async function createShortcut(): Promise<void> {
 		await window.api.createShortcut({
 			url,
-			name: shortcutName,
-			icon: selectedIcon!,
+			name,
+			icon: selectedIcon,
 		});
-	};
+	}
+
+	const shortcutMenu = (
+		<ShortcutSelection>
+			<NameSelection setName={setName} />
+			<IconSelection
+				selectedIcon={selectedIcon}
+				setSelectedIcon={setSelectedIcon}
+				availableIcons={availableIcons}
+			/>
+			<CreateShortcutButton createShortcut={createShortcut} />
+		</ShortcutSelection>
+	);
 
 	return (
 		<>
-			<CssBaseline />
-			<NavBar />
-			<Container>
+			<Navbar />
+			<Container maxWidth="lg" sx={{ my: 3 }}>
 				<UrlEntry
-					url={url}
-					setUrl={setUrl}
-					setLoaded={setLoaded}
-					setAvailableIcons={setAvailableIcons}
+					loadShortcutMenu={loadShortcutMenu}
+					onUrlChange={onUrlChange}
 				/>
-				{loaded ? (
-					<ShortcutSelection
-						availableIcons={availableIcons}
-						selectedIcon={selectedIcon}
-						setSelectedIcon={setSelectedIcon}
-						setShortcutName={setShortcutName}
-						createShortcut={createShortcut}
-					/>
-				) : (
-					<Typography variant="h2" color="info" sx={{ opacity: 0.4 }}>
-						Create your own revolutionary shortcuts!
-					</Typography>
-				)}
+				{loaded ? shortcutMenu : null}
 			</Container>
 		</>
 	);

@@ -9,6 +9,7 @@ interface NewShortcutData {
 export interface NativeApi {
 	getAvailableIcons(url: string): Promise<string[]>;
 	createShortcut(data: NewShortcutData): Promise<void>;
+	platform: string;
 }
 
 // Custom APIs for renderer
@@ -19,6 +20,7 @@ const api: NativeApi = {
 	createShortcut(data) {
 		return ipcRenderer.invoke("createShortcut", data);
 	},
+	platform: process.platform,
 };
 
 // Use `contextBridge` APIs to expose Electron APIs to
